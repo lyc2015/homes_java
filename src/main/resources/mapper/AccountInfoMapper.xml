@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.AccountInfoMapper">
+	<resultMap id="BankBranchInfo" type="map" />
+	<resultMap id="AccountInfo"
+		type="jp.co.lyc.cms.model.AccountInfoModel" />
+	<select id="selectAccountInfo" parameterType="String"
+		resultMap="AccountInfo">
+		SELECT
+		T004.employeeOrCustomerNo,
+		T004.bankCode,
+		T004.bankBranchCode,
+		T004.accountTypeStatus,
+		T004.accountNo,
+		T004.accountName,
+		T004.accountBelongsStatus,
+		M002.bankBranchName
+		FROM
+		T004AccountInfo AS T004
+		LEFT JOIN M002BankBranch AS M002 ON
+		T004.bankCode = M002.bankCode
+		AND T004.bankBranchCode =
+		M002.bankBranchCode
+		WHERE
+		employeeOrCustomerNo = #{employeeOrCustomerNo}
+	</select>
+	<!-- 支店情報検索 -->
+	<select id="getBankBranchInfo" resultMap="BankBranchInfo"
+		parameterType="map">
+		SELECT
+		M002.bankBranchName,
+		M002.bankBranchCode
+		FROM
+		M002BankBranch AS
+		M002
+		LEFT JOIN
+		M001Bank AS M001
+		ON
+		M001.bankCode = M002.bankCode
+		WHERE
+		M002.bankCode = #{bankCode}
+		<if test="bankBranchCode != null">
+			AND M002.bankBranchCode = #{bankBranchCode}
+		</if>
+		<if test="bankBranchName != null">
+			AND M002.bankBranchName = #{bankBranchName}
+		</if>
+	</select>
+	<!-- 口座情報インサート -->
+	<insert id="insertAccount" parameterType="String">
+		INSERT INTO
+		T004AccountInfo(
+		employeeOrCustomerNo,
+		accountBelongsStatus,
+		bankCode,
+		bankBranchCode,
+		accountNo,
+		accountName,
+		accountTypeStatus,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUE(
+		#{employeeOrCustomerNo},
+		#{accountBelongsStatus},
+		#{bankCode},
+		#{bankBranchCode},
+		#{accountNo},
+		#{accountName},
+		#{accountTypeStatus},
+		date_add(now(), interval 9 hour),
+		date_add(now(), interval 9 hour),
+		#{updateUser})
+	</insert>
+	<!-- 口座情報アップデート -->
+	<update id="updateAccount" parameterType="String">
+		INSERT INTO
+		T004AccountInfo(
+		employeeOrCustomerNo,
+		accountBelongsStatus,
+		bankCode,
+		bankBranchCode,
+		accountNo,
+		accountName,
+		accountTypeStatus,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUE(
+		#{employeeOrCustomerNo},
+		#{accountBelongsStatus},
+		#{bankCode},
+		#{bankBranchCode},
+		#{accountNo},
+		#{accountName},
+		#{accountTypeStatus},
+		date_add(now(), interval 9 hour),
+		date_add(now(), interval 9 hour),
+		#{updateUser})
+		on DUPLICATE key
+		UPDATE
+		<!-- <if test="bankCode != null">
+			bankCode = #{bankCode},
+		</if> -->
+		<if test="bankBranchCode != null">
+			bankBranchCode = #{bankBranchCode},
+		</if>
+		<if test="accountNo != null">
+			accountNo = #{accountNo},
+		</if>
+		<if test="accountName != null">
+			accountName = #{accountName},
+		</if>
+		accountTypeStatus = #{accountTypeStatus},
+		updateTime = date_add(now(), interval 9 hour),
+		updateUser = #{updateUser}
+	</update>
+
+	<!-- 口座情報削除 -->
+	<delete id="deleteAccount" parameterType="String">
+		DELETE FROM
+		T004AccountInfo
+		WHERE
+		employeeOrCustomerNo =
+		#{employeeOrCustomerNo}
+	</delete>
+
+	<!-- 口座情報アップデート -->
+	<update id="replaceAccount" parameterType="String">
+		REPLACE INTO
+		T004AccountInfo(
+		employeeOrCustomerNo,
+		accountBelongsStatus,
+		bankCode,
+		bankBranchCode,
+		accountNo,
+		accountName,
+		accountTypeStatus,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUE(
+		#{employeeOrCustomerNo},
+		#{accountBelongsStatus},
+		#{bankCode},
+		#{bankBranchCode},
+		#{accountNo},
+		#{accountName},
+		#{accountTypeStatus},
+		date_add(now(), interval 9 hour),
+		date_add(now(), interval 9 hour),
+		#{updateUser})
+	</update>
+
+	<select id="getAccountCount" parameterType="String" resultMap="AccountInfo">
+		SELECT
+		count(T004.employeeOrCustomerNo) as accountNumber
+		FROM
+		T004AccountInfo AS T004
+		WHERE
+		employeeOrCustomerNo = #{employeeOrCustomerNo}
+	</select>
+</mapper>
