@@ -1,1 +1,0 @@
-需要添加一个 /bin/jasperreports-fonts-6.10.0.jar
