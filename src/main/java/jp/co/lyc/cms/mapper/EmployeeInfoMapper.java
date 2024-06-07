@@ -7,11 +7,14 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import jp.co.lyc.cms.model.BpInfoModel;
-import jp.co.lyc.cms.model.EmployeeInfoCsvModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 
 @Mapper
 public interface EmployeeInfoMapper {
+
+	public void insertEmployeeInfo(EmployeeModel emp);
+
+	// ----
 
 	/**
 	 * ログイン
@@ -32,8 +35,6 @@ public interface EmployeeInfoMapper {
 
 	public List<EmployeeModel> getEmployeesInfo(Map<String, Object> sendMap);
 
-	public List<EmployeeInfoCsvModel> getEmployeesCSV(List<String> empList);
-
 	public List<String> getEmployeeWithAdmission();
 
 	public List<EmployeeModel> getEmployeesDevelopLanguage();
@@ -52,13 +53,6 @@ public interface EmployeeInfoMapper {
 	 */
 	public List<String> verificationEmployeeInfo();
 
-	/**
-	 * 社員情報を追加
-	 * 
-	 * @param sendMap
-	 */
-
-	public void insertEmployeeInfo(Map<String, Object> sendMap);
 
 	/**
 	 * 社員情報詳細を追加

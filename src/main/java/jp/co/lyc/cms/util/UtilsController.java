@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,12 +54,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sun.mail.util.MailSSLSocketFactory;
-
-import jp.co.lyc.cms.model.EmailModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.ModelClass;
-import jp.co.lyc.cms.model.ResultModel;
 import jp.co.lyc.cms.service.UtilsService;
 import net.sf.json.JSONObject;
 
@@ -90,7 +84,7 @@ public class UtilsController {
 		} catch (Exception e) {
 		}
 		com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSON.parseObject(json.toString());
-//		String yearMonth = (String)jsonObject.getOrDefault("yearMonth", "");
+		// String yearMonth = (String)jsonObject.getOrDefault("yearMonth", "");
 		Set<String> keys = jsonObject.keySet();
 		for (String key : keys) {
 			JapanHoliday.put(key, jsonObject.getString(key));
@@ -196,19 +190,6 @@ public class UtilsController {
 	@ResponseBody
 	public List<ModelClass> getVisa() {
 		List<ModelClass> list = utilsService.getVisa();
-		return list;
-	}
-
-	/**
-	 * 開発言語を取得
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getTechnologyType", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getTechnologyType(@RequestBody EmployeeModel emp) {
-		Map<String, String> sendMap = getParam(emp);
-		List<ModelClass> list = utilsService.getTechnologyType(sendMap);
 		return list;
 	}
 
@@ -872,32 +853,6 @@ public class UtilsController {
 		return list;
 	}
 
-	/**
-	 * 条件を取得
-	 * 
-	 * @param emp
-	 * @return
-	 */
-	public Map<String, String> getParam(EmployeeModel emp) {
-		Map<String, String> sendMap = new HashMap<String, String>();
-		String developmentLanguageNo1 = emp.getDevelopLanguage1();// 開発言語1
-		if (developmentLanguageNo1 != null && developmentLanguageNo1.length() != 0) {
-			sendMap.put("developmentLanguageNo1", developmentLanguageNo1);
-		}
-		return sendMap;
-	}
-
-	/**
-	 * パスワードを取得
-	 * 
-	 * @param emp
-	 * @return
-	 */
-	@RequestMapping(value = "/getPassword", method = RequestMethod.POST)
-	@ResponseBody
-	public String getPassword(@RequestBody EmployeeModel emp) {
-		return utilsService.getPassword(emp.getEmployeeNo());
-	}
 
 	/**
 	 * 社員氏名を取得する
@@ -943,22 +898,6 @@ public class UtilsController {
 			}
 		}
 		return list;
-	}
-
-	/**
-	 * パスワードリセット
-	 * 
-	 * @param emp
-	 * @return
-	 */
-	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-	@ResponseBody
-	public boolean resetPassword(@RequestBody EmployeeModel emp) {
-		HashMap<String, String> sendMap = new HashMap<>();
-		sendMap.put("employeeNo", emp.getEmployeeNo());
-		sendMap.put("password", emp.getPassword());
-		sendMap.put("oldPassword", emp.getOldPassword());
-		return utilsService.resetPassword(sendMap);
 	}
 
 	/**
@@ -1227,278 +1166,6 @@ public class UtilsController {
 
 	}
 
-	/**
-	 * メールを発送する
-	 * 
-	 * @param emailMod
-	 */
-	public ResultModel EmailSend(EmailModel emailMod) {
-		ResultModel resulterr = new ResultModel();
-		Session session = null;
-		try {
-			// 创建一个资源文件
-			Properties properties = new Properties();
-			// 显示日志
-			properties.setProperty("mail.debug", "true");
-			// 邮箱类别
-			properties.setProperty("mail.host", "smtp.lolipop.jp");
-			// 设定验证开启
-			properties.setProperty("mail.smtp.auth", "true");
-			// 发送 接受方式
-			properties.setProperty("mail.transpot.prococol", "smtp");
-			// 设置请求服务器端口号
-			properties.put("mail.smtp.port", 587);
-			// 设置ssl加密服务开启
-			properties.setProperty("mail.smtp.ssl.enable", "smtp");
-			// 创建加密证书
-			MailSSLSocketFactory sf = new MailSSLSocketFactory();
-			// properties 底层调用的的是put方法
-			properties.put("Mail.smtp.ssl.socketFactory", sf);
-			// 获取具有以上属性的邮件session ---> 连接池
-			session = Session.getInstance(properties);
-			// 创建获取连接
-			Transport transport = session.getTransport();
-			// 进行连接
-			String mailPass = utilsService.getMailPass();
-			String name = mailPass.split(" ")[0];
-			String pass = mailPass.split(" ")[1];
-			transport.connect(name, pass);
-
-			// 创建一个信息
-			Message message = new MimeMessage(session);
-			// 设定发送方
-			message.setFrom(new InternetAddress(emailMod.getMailFrom()));
-			// 设置主题内容
-			message.setSubject(emailMod.getMailTitle());
-			// message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
-
-			if (emailMod.getSelectedMailCC() != null) {
-				String[] addresssCC = emailMod.getSelectedMailCC();
-				int lenCC = addresssCC.length;
-				Address[] addsCC = new Address[lenCC];
-				for (int i = 0; i < lenCC; i++) {
-					addsCC[i] = new InternetAddress(addresssCC[i]);
-				}
-				// InternetAddress[] sendCC = new InternetAddress[] {new
-				// InternetAddress("jyw.fendou@gmail.com", "", "UTF-8")};
-				message.addRecipients(MimeMessage.RecipientType.CC, addsCC);
-			}
-			// 向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
-			MimeMultipart multipart = new MimeMultipart();
-			// 设置邮件的文本内容
-			MimeBodyPart contentPart = new MimeBodyPart();
-			contentPart.setContent(emailMod.getMailConfirmContont(), "text/plain;charset=UTF-8");
-			multipart.addBodyPart(contentPart);
-
-			// multipart.addBodyPart(filePart);
-			multipart.setSubType("mixed");
-			// 将multipart对象放到message中
-			message.setContent(multipart);
-
-			String[] addresss = emailMod.getSelectedmail().split(",");
-			int len = 0;
-			for (int i = 0; i < addresss.length; i++) {
-				if (!addresss[i].equals(""))
-					len++;
-			}
-			Address[] adds = new Address[len];
-			len = 0;
-			for (int i = 0; i < addresss.length; i++) {
-				if (!addresss[i].equals("")) {
-					adds[len] = new InternetAddress(addresss[i]);
-					len++;
-				}
-			}
-			message.addRecipients(MimeMessage.RecipientType.TO, adds);
-
-			// 发送邮件
-			transport.sendMessage(message, message.getAllRecipients());
-			// transport.close();
-			resulterr.setSuccess();
-		} catch (GeneralSecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			resulterr.setErrMsg(e.getMessage());
-		} catch (NoSuchProviderException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			resulterr.setErrMsg(e.getMessage());
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			resulterr.setErrMsg(e.getMessage());
-		}
-		return resulterr;
-	}
-
-	/**
-	 * sendMailWithFile
-	 * 
-	 * @param emailMod
-	 * @param path
-	 */
-	public ResultModel sendMailWithFile(EmailModel emailMod) {
-		ResultModel resultModel = new ResultModel();// 戻す
-		Session session = null;
-		try {
-			// 创建一个资源文件
-			Properties properties = new Properties();
-			// 显示日志
-			properties.setProperty("mail.debug", "true");
-			// 邮箱类别
-			properties.setProperty("mail.host", "smtp.lolipop.jp");
-			// 设定验证开启
-			properties.setProperty("mail.smtp.auth", "true");
-			// 发送 接受方式
-			properties.setProperty("mail.transpot.prococol", "smtp");
-			// 设置请求服务器端口号
-			properties.put("mail.smtp.port", 587);
-			// 设置ssl加密服务开启
-			properties.setProperty("mail.smtp.ssl.enable", "smtp");
-			// 创建加密证书
-			MailSSLSocketFactory sf = new MailSSLSocketFactory();
-			// properties 底层调用的的是put方法
-			properties.put("Mail.smtp.ssl.socketFactory", sf);
-			// 获取具有以上属性的邮件session ---> 连接池
-			session = Session.getInstance(properties);
-			// 创建获取连接
-			Transport transport = session.getTransport();
-			// 进行连接
-			String mailPass = utilsService.getMailPass();
-			String name = mailPass.split(" ")[0];
-			String pass = mailPass.split(" ")[1];
-			transport.connect(name, pass);
-			// 创建一个信息
-			Message message = new MimeMessage(session);
-			// 设定发送方
-			message.setFrom(new InternetAddress(emailMod.getMailFrom()));
-			// 设置主题内容
-			message.setSubject(emailMod.getMailTitle());
-			// message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
-			if (emailMod.getSelectedMailCC() != null) {
-				String[] addresssCC = emailMod.getSelectedMailCC();
-				int lenCC = addresssCC.length;
-				Address[] addsCC = new Address[lenCC];
-				for (int i = 0; i < lenCC; i++) {
-					addsCC[i] = new InternetAddress(addresssCC[i]);
-				}
-				// InternetAddress[] sendCC = new InternetAddress[] {new
-				// InternetAddress("jyw.fendou@gmail.com", "", "UTF-8")};
-				message.addRecipients(MimeMessage.RecipientType.CC, addsCC);
-			}
-
-			// 向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
-			MimeMultipart multipart = new MimeMultipart();
-			// 设置邮件的文本内容
-			MimeBodyPart contentPart = new MimeBodyPart();
-			String mailConfirmContont = emailMod.getMailConfirmContont();
-			contentPart.setContent(mailConfirmContont, "text/plain;charset=UTF-8");
-			multipart.addBodyPart(contentPart);
-
-			if (emailMod.getPaths() != null && emailMod.getPaths().length != 0) {
-				for (int i = 0; i < emailMod.getPaths().length; i++) {
-					// 添加附件
-					MimeBodyPart filePart = new MimeBodyPart();
-					DataSource source = new FileDataSource(emailMod.getPaths()[i]);
-					// DataSource source = new
-					// FileDataSource("C:\\file\\履歴書\\LYC168_営業文章\\営業EE_aaa.xls");
-					// 添加附件的内容
-					filePart.setDataHandler(new DataHandler(source));
-					// 添加附件的标题
-					String filenames = MimeUtility.encodeText(source.getName());
-					filenames = filenames.replace("\\r", "").replace("\\n", "").replace(" ", "");
-					filePart.setFileName(filenames);
-					multipart.addBodyPart(filePart);
-				}
-			}
-			// 处理附件
-			MultipartFile[] files = emailMod.getFiles();
-			if (files != null && files.length != 0) {
-				for (int i = 0; i < files.length; i++) {
-					// 添加附件的标题
-					String filenames = files[i].getOriginalFilename();
-					// 添加附件
-					MimeBodyPart filePart = new MimeBodyPart();
-					File file = MultipartFileToFile(files[i]);
-					DataSource source = new FileDataSource(file);
-					// 添加附件的内容
-					filePart.setDataHandler(new DataHandler(source));
-					filenames = filenames.replace("\\r", "").replace("\\n", "").replace(" ", "");
-					filePart.setFileName(filenames);
-					multipart.addBodyPart(filePart);
-				}
-			}
-
-			// multipart.addBodyPart(filePart);
-			multipart.setSubType("mixed");
-			// 将multipart对象放到message中
-			message.setContent(multipart);
-
-			String[] addresss = emailMod.getSelectedmail().split(",");
-			int len = 0;
-			for (int i = 0; i < addresss.length; i++) {
-				if (!addresss[i].equals(""))
-					len++;
-			}
-			if (len == 0) {
-				resultModel.setErrMsg("Invalid Addresses");
-				return resultModel;
-			}
-			Address[] adds = new Address[len];
-			len = 0;
-			for (int i = 0; i < addresss.length; i++) {
-				if (!addresss[i].equals("")) {
-					adds[len] = new InternetAddress(addresss[i]);
-					len++;
-				}
-			}
-			message.addRecipients(MimeMessage.RecipientType.TO, adds);
-
-			// 发送邮件
-			transport.sendMessage(message, message.getAllRecipients());
-			// transport.close();
-			resultModel.setSuccess();
-		} catch (GeneralSecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			resultModel.setErrMsg(e.getMessage());
-		} catch (NoSuchProviderException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			resultModel.setErrMsg(e.getMessage());
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			resultModel.setErrMsg(e.getMessage());
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			resultModel.setErrMsg(e.getMessage());
-		}
-		return resultModel;
-	}
-
-	/**
-	 * 将MultipartFile转换为File
-	 * 
-	 * @param multiFile
-	 * @return
-	 */
-	private File MultipartFileToFile(MultipartFile multiFile) {
-		// 获取文件名
-		String fileName = multiFile.getOriginalFilename();
-		// 获取文件后缀
-		String prefix = fileName.substring(fileName.lastIndexOf("."));
-		// 若须要防止生成的临时文件重复,能够在文件名后添加随机码
-		try {
-			File file = File.createTempFile(fileName, prefix);
-			multiFile.transferTo(file);
-			return file;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	/**
 	 * enterPeriodを取得する
