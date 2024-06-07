@@ -52,13 +52,12 @@ public class EmployeeInfoController extends BaseController {
         }
         if (emp.getAlphabetName() == null || emp.getAlphabetName().isEmpty()) {
             errorsMessage.append("ローマ字を入力してください。");
-        }
-        if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().isEmpty()
-                || emp.getEmployeeLastName() == null || emp.getEmployeeLastName().isEmpty()) {
-            errorsMessage.append("社員名を入力してください。");
+        // }
+        // if (emp.getEmployeeFirstName() == null || emp.getEmployeeFirstName().isEmpty()
+        //         || emp.getEmployeeLastName() == null || emp.getEmployeeLastName().isEmpty()) {
+        //     errorsMessage.append("社員名を入力してください。");
         }
         
         return errorsMessage.toString();
     }
 }
-

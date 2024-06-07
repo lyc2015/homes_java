@@ -12,7 +12,7 @@
     <insert id="insertEmployeeInfo" parameterType="jp.co.lyc.cms.model.EmployeeModel">
         INSERT INTO T001EmployeeDetai (
             employeeNo,
-            employeeFristName,
+            employeeFirstName,
             employeeLastName,
             password,
             authorityCode,
@@ -45,7 +45,7 @@
             t001EmployeeDetaicol1
         ) VALUES (
             #{employeeNo},
-            #{employeeFristName},
+            #{employeeFirstName},
             #{employeeLastName},
             #{password},
             #{authorityCode},

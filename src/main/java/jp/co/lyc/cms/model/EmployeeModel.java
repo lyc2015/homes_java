@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class EmployeeModel implements Serializable {
 	private int employeeNo;
-	private String employeeFristName;
+	private String employeeFirstName;
 	private String employeeLastName;
 	private String password;
 	private int authorityCode;
@@ -47,12 +47,12 @@ public class EmployeeModel implements Serializable {
 		this.employeeNo = employeeNo;
 	}
 
-	public String getEmployeeFristName() {
-		return employeeFristName;
+	public String getemployeeFirstName() {
+		return employeeFirstName;
 	}
 
-	public void setEmployeeFristName(String employeeFristName) {
-		this.employeeFristName = employeeFristName;
+	public void setemployeeFirstName(String employeeFirstName) {
+		this.employeeFirstName = employeeFirstName;
 	}
 
 	public String getEmployeeLastName() {
