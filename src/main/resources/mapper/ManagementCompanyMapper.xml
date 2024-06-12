@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.lyc.cms.mapper.ManagementCompanyMapper">
+
+    <resultMap id="ManagementCompanyModelResultMap" type="jp.co.lyc.cms.model.ManagementCompanyModel">
+        <!-- Define mapping between database columns and EmployeeModel fields -->
+    </resultMap>
+
+
+    <insert id="registerManagementCompany" parameterType="jp.co.lyc.cms.model.ManagementCompanyModel">
+        INSERT INTO T005ManagementCompanyInfo (managementCompanyID, managementCompanyName, postCode, address, phoneNo, mail, homePageURL, remark, updateTime, createTime, updateUser) VALUES (#{managementCompanyID}, #{managementCompanyName}, #{managementCompanyPostCode},  #{managementCompanyAddress}, #{managementCompanyPhoneNo}, #{managementCompanyMail},  #{managementCompanyURL},  #{managementCompanyRemark}, NOW(), NOW(), #{updateUser})
+    </insert>
+
+    <select id="searchMaxManagementCompanyID" resultType="java.lang.String">
+        SELECT CONCAT('M', LPAD(MAX(CAST(SUBSTRING(managementCompanyID, 2) AS UNSIGNED)) + 1, 4, '0')) AS next_value FROM T005ManagementCompanyInfo WHERE managementCompanyID LIKE'M%'
+    </select>
+
+
+</mapper>
