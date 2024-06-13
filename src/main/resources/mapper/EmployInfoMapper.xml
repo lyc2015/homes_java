@@ -41,6 +41,7 @@
             updateTime,
             createTime,
             updateUser,
+            picInfo,
             t001EmployeeDetaicol,
             t001EmployeeDetaicol1
         ) VALUES (
@@ -74,6 +75,7 @@
             NOW(),
             NOW(),
             #{updateUser},
+            #{picInfo},
             #{t001EmployeeDetaicol},
             #{t001EmployeeDetaicol1}
         )

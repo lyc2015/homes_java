@@ -12,6 +12,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.ModelClass;
@@ -58,6 +60,55 @@ public class UtilsController {
 	@ResponseBody
 	public List<ModelClass> getNationality() {
 		List<ModelClass> list = utilsService.getNationalitys();
+		return list;
+	}
+
+	/**
+	 * 場所取る
+	 * 
+	 * @return
+	 */
+
+	@PostMapping("/getStation")
+	@ResponseBody
+	public List<ModelClass> getStation() {
+		List<ModelClass> list = utilsService.getStation();
+		return list;
+	}
+
+	/**
+	 * 社員形式を取得
+	 * 
+	 * @return
+	 */
+	@PostMapping("/getEmployeeForm")
+	@ResponseBody
+	public List<ModelClass> getEmployeeForm() {
+		List<ModelClass> list = utilsService.getStaffForms();
+		return list;
+	}
+
+	/**
+	 * 部署を取得
+	 * 
+	 * @return
+	 */
+	@PostMapping("/getDepartment")
+	@ResponseBody
+	public List<ModelClass> getDepartment() {
+		List<ModelClass> list = utilsService.getDepartment();
+		return list;
+	}
+
+	/**
+	 * 仲介区分を取得
+	 * 
+	 * @return
+	 */
+	@PostMapping("/getHomesAgentCode")
+	@ResponseBody
+	public List<ModelClass> getHomesAgentCode() {
+		List<ModelClass> list = utilsService.getHomesAgentCode();
 		return list;
 	}
 }

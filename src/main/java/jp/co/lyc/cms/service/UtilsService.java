@@ -25,4 +25,43 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getNationalitys();
 		return list;
 	}
+
+	/**
+	 * 場所
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getStation() {
+		return utilsMapper.getStation();
+	}
+
+	/**
+	 * 社員形式を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getStaffForms() {
+		List<ModelClass> list = utilsMapper.getStaffForms();
+		return list;
+	}
+
+	/**
+	 * 部署を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getDepartment() {
+		List<ModelClass> list = utilsMapper.getDepartment();
+		return list;
+	}
+	
+	/**
+	 * 仲介区分を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getHomesAgentCode() {
+		List<ModelClass> list = utilsMapper.getHomesAgentCode();
+		return list;
+	}
 }
