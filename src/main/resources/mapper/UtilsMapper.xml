@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.UtilsMapper">
+	<!--国籍 -->
+	<select id="getNationalitys"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT nationalityCode code,nationalityName name FROM
+		M001NationalityMaster;
+	</select>
+
+	<!--国籍 -->
+	<select id="getEmployeeInfo"
+			resultType="jp.co.lyc.cms.model.InfoModelClass">
+		SELECT employeeNo id, employeeFirstName firstName,employeeLastName lastName FROM
+			T001EmployeeDetai;
+	</select>
+
+	<select id="getcommissionAdCode"
+			resultType="jp.co.lyc.cms.model.InfoModelClass">
+		SELECT brokerageFeeCode id,brokerageFeeName brokerageFeeName FROM
+			M016BrokerageFeeMaster;
+	</select>
+
+	<select id="getCustomers"
+			resultType="jp.co.lyc.cms.model.InfoModelClass">
+		SELECT customerNo id, customerLastName lastName,customerFirstName firstName FROM
+			T002customerInfo;
+	</select>
+
+	<select id="getCompany"
+			resultType="jp.co.lyc.cms.model.InfoModelClass">
+		SELECT managementCompanyID id, managementCompanyName firstName FROM
+			T005ManagementCompanyInfo;
+	</select>
+</mapper>

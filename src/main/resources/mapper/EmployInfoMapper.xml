@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
+
+    <resultMap id="EmployeeModelResultMap" type="jp.co.lyc.cms.model.EmployeeModel">
+        <!-- Define mapping between database columns and EmployeeModel fields -->
+    </resultMap>
+
+    <insert id="insertEmployeeInfo" parameterType="jp.co.lyc.cms.model.EmployeeModel">
+        INSERT INTO T001EmployeeDetai (
+            employeeNo,
+            employeeFirstName,
+            employeeLastName,
+            password,
+            authorityCode,
+            genderStatus,
+            birthday,
+            japaneseCalendar,
+            alphabetName,
+            furigana,
+            nationalityCode,
+            intoCompanyYearAndMonth,
+            employeeFormCode,
+            retirementResonClassification,
+            retirementYearAndMonth,
+            comeToJapanYearAndMonth,
+            graduationUniversity,
+            graduationYearAndMonth,
+            residenceCode,
+            companyMail,
+            phoneNo,
+            employmentInsuranceStatus,
+            socialInsuranceStatus,
+            yearsOfExperience,
+            retirementResonClassificationCode,
+            departmentCode,
+            homesAgentCode,
+            updateTime,
+            createTime,
+            updateUser,
+            t001EmployeeDetaicol,
+            t001EmployeeDetaicol1
+        ) VALUES (
+            #{employeeNo},
+            #{employeeFirstName},
+            #{employeeLastName},
+            #{password},
+            #{authorityCode},
+            #{genderStatus},
+            #{birthday},
+            #{japaneseCalendar},
+            #{alphabetName},
+            #{furigana},
+            #{nationalityCode},
+            #{intoCompanyYearAndMonth},
+            #{employeeFormCode},
+            #{retirementResonClassification},
+            #{retirementYearAndMonth},
+            #{comeToJapanYearAndMonth},
+            #{graduationUniversity},
+            #{graduationYearAndMonth},
+            #{residenceCode},
+            #{companyMail},
+            #{phoneNo},
+            #{employmentInsuranceStatus},
+            #{socialInsuranceStatus},
+            #{yearsOfExperience},
+            #{retirementResonClassificationCode},
+            #{departmentCode},
+            #{homesAgentCode},
+            NOW(),
+            NOW(),
+            #{updateUser},
+            #{t001EmployeeDetaicol},
+            #{t001EmployeeDetaicol1}
+        )
+    </insert>
+
+</mapper>

@@ -1,0 +1,10 @@
+/target/
+/logback.logdir/
+/.settings/
+.classpath
+
+.idea
+.settings
+.vs
+.vscode
+.history

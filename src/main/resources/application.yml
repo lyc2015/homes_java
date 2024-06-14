@@ -1,0 +1,3 @@
+logback:
+  logdir: /C/workspacer/LYC_CMS/log/
+  appname: CMS
