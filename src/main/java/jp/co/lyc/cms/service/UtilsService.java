@@ -1,7 +1,5 @@
 package jp.co.lyc.cms.service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,41 +25,89 @@ public class UtilsService {
 	}
 
 	/**
-	 * 場所
-	 * 
+	 * 売上登録の基本情報を取得
+	 *
 	 * @return
 	 */
-	public List<ModelClass> getStation() {
-		return utilsMapper.getStation();
+	public Map<String, Object> getSalesBaseInfo() {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<InfoModelClass> commissionAdCode = utilsMapper.getcommissionAdCode();
+		List<Object> adCodeList = new ArrayList<Object>();
+		for (InfoModelClass modelClass : commissionAdCode) {
+			Map<String, Object> empMode = new HashMap<String, Object>();
+			empMode.put("value", modelClass.getId());
+			empMode.put("label", modelClass.getBrokerageFeeName());
+			adCodeList.add(empMode);
+		}
+		List<InfoModelClass> list = utilsMapper.getEmployeeInfo();
+		List<Object> employeeList = getInfoMap(list);
+		List<InfoModelClass> cuslist = utilsMapper.getCustomers();
+		List<Object> customerList = getInfoMap(cuslist);
+		List<InfoModelClass> comList = utilsMapper.getCompany();
+		List<Object> company = new ArrayList<Object>();
+		for (InfoModelClass modelClass : comList) {
+			Map<String, Object> empMode = new HashMap<String, Object>();
+			empMode.put("value", modelClass.getId());
+			empMode.put("label", modelClass.getFirstName());
+			company.add(empMode);
+		}
+
+		resultMap.put("employeeList",employeeList);
+		resultMap.put("adCodeList", adCodeList);
+		resultMap.put("customerList",customerList);
+		resultMap.put("company",company);
+		return resultMap;
+	}
+	public List<Object> getInfoMap(List<InfoModelClass> list) {
+
+		List<Object> newList = new ArrayList<Object>();
+		for(InfoModelClass modelClass : list) {
+			Map<String, Object> empMode = new HashMap<String, Object>();
+			empMode.put("id", modelClass.getId());
+			empMode.put("firstName", modelClass.getFirstName());
+			empMode.put("lastName", modelClass.getLastName());
+			newList.add(empMode);
+		}
+
+		return newList;
 	}
 
-	/**
-	 * 社員形式を取得
-	 * 
-	 * @return
-	 */
-	public List<ModelClass> getStaffForms() {
-		List<ModelClass> list = utilsMapper.getStaffForms();
-		return list;
-	}
+    /**
+     * 場所
+     *
+     * @return
+     */
+    public List<ModelClass> getStation() {
+        return utilsMapper.getStation();
+    }
 
-	/**
-	 * 部署を取得
-	 * 
-	 * @return
-	 */
-	public List<ModelClass> getDepartment() {
-		List<ModelClass> list = utilsMapper.getDepartment();
-		return list;
-	}
-	
-	/**
-	 * 仲介区分を取得
-	 * 
-	 * @return
-	 */
-	public List<ModelClass> getHomesAgentCode() {
-		List<ModelClass> list = utilsMapper.getHomesAgentCode();
-		return list;
-	}
+    /**
+     * 社員形式を取得
+     *
+     * @return
+     */
+    public List<ModelClass> getStaffForms() {
+        List<ModelClass> list = utilsMapper.getStaffForms();
+        return list;
+    }
+
+    /**
+     * 部署を取得
+     *
+     * @return
+     */
+    public List<ModelClass> getDepartment() {
+        List<ModelClass> list = utilsMapper.getDepartment();
+        return list;
+    }
+
+    /**
+     * 仲介区分を取得
+     *
+     * @return
+     */
+    public List<ModelClass> getHomesAgentCode() {
+        List<ModelClass> list = utilsMapper.getHomesAgentCode();
+        return list;
+    }
 }

@@ -20,10 +20,27 @@ public class Myfilter implements Filter{
 			response.setCharacterEncoding("UTF-8");
 		    response.setContentType("application/json; charset=utf-8");
 
+//			解决跨域问题，测试完成后恢复
+//			// response.setHeader("Access-Control-Allow-Origin","http://127.0.0.1:3000");// * 允许所有域名跨域访问
+//
+//			// 获取请求的 Origin 头部
+//			String origin = request.getHeader("Origin");
+//			// 检查请求的 Origin 头部是否是允许的来源之一
+//			if (origin != null && (origin.equals("http://localhost:3000") || origin.equals("http://127.0.0.1:3000"))) {
+//				response.setHeader("Access-Control-Allow-Origin", origin);
+//			}
+
+
+//			解决测试跨域问题开始
+			response.setHeader("Access-Control-Allow-Origin","*");// * 允许所有域名跨域访问
 			// response.setHeader("Access-Control-Allow-Origin","http://127.0.0.1:3000");// * 允许所有域名跨域访问
-			
+
 			// 获取请求的 Origin 头部
 			String origin = request.getHeader("Origin");
+			response.setHeader("Access-Control-Allow-Origin", origin);
+
+//		结束
+
 			// 检查请求的 Origin 头部是否是允许的来源之一
 			if (origin != null && (origin.equals("http://localhost:3000") || origin.equals("http://127.0.0.1:3000"))) {
 				response.setHeader("Access-Control-Allow-Origin", origin);
@@ -39,6 +56,9 @@ public class Myfilter implements Filter{
 				!requestURI.contains("employee") &&
 				!requestURI.contains("login2") &&
 				!requestURI.contains("subMenuEmployee") &&
+				!requestURI.contains("subMenu")&&
+				!requestURI.contains("sales")&&
+				!requestURI.contains("getSalesBaseInfo")&&
 				!requestURI.contains("subMenu")
 			) {
 				if(request.getSession().getAttribute("employeeNo") == null) {

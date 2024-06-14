@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.EmployeeNameModel;
+import jp.co.lyc.cms.model.InfoModelClass;
 import org.apache.ibatis.annotations.Mapper;
 
 import jp.co.lyc.cms.model.ModelClass;
@@ -13,36 +16,63 @@ public interface UtilsMapper {
 	/**
 	 * 国籍を取得
 	 * 
-	 * @return
+	 *
 	 */
 	public List<ModelClass> getNationalitys();
 
 	/**
-	 * 場所
-	 * 
-	 * @return
+	 * 担当者を取得
+	 *
+	 *
 	 */
-	public List<ModelClass> getStation();
+	public List<InfoModelClass> getEmployeeInfo();
 
 	/**
-	 * 社員形式を取得
-	 * 
-	 * 
+	 * 仲介手数料を取得
+	 *
+	 *
 	 */
-	public List<ModelClass> getStaffForms();
+	public List<InfoModelClass> getcommissionAdCode();
 
 	/**
-	 * 部署を取得
-	 * 
-	 * 
+	 * 契約者を取得
+	 *
+	 *
 	 */
-	public List<ModelClass> getDepartment();
-
+	public List<InfoModelClass> getCustomers();
 	/**
-	 * 仲介区分を取得
-	 * 
-	 * 
+	 * 契約者を取得
+	 *
+	 *
 	 */
-	public List<ModelClass> getHomesAgentCode();	
+	public List<InfoModelClass> getCompany();
 
+
+    /**
+     * 場所
+     *
+     * @return
+     */
+    public List<ModelClass> getStation();
+
+    /**
+     * 社員形式を取得
+     *
+     *
+     */
+    public List<ModelClass> getStaffForms();
+
+    /**
+     * 部署を取得
+     *
+     *
+     */
+    public List<ModelClass> getDepartment();
+
+    /**
+     * 仲介区分を取得
+     *
+     *
+     */
+    public List<ModelClass> getHomesAgentCode();
 }

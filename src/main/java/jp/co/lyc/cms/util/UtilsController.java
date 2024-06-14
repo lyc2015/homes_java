@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,6 +65,8 @@ public class UtilsController {
 	}
 
 	/**
+	 * 売上登録の基本情報を取得
+	 *
 	 * 場所取る
 	 * 
 	 * @return
@@ -93,12 +96,26 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
+	@GetMapping ("/getSalesBaseInfo")
 	@PostMapping("/getDepartment")
 	@ResponseBody
-	public List<ModelClass> getDepartment() {
-		List<ModelClass> list = utilsService.getDepartment();
-		return list;
+	public Map<String, Object> getSalesBaseInfo() {
+		Map<String, Object> reqObj = utilsService.getSalesBaseInfo();
+		reqObj.put("result","success");
+		return reqObj;
 	}
+
+    /**
+     * 部署を取得
+     *
+     * @return
+     */
+    @PostMapping("/getDepartment")
+    @ResponseBody
+    public List<ModelClass> getDepartment() {
+        List<ModelClass> list = utilsService.getDepartment();
+        return list;
+    }
 
 	/**
 	 * 仲介区分を取得
