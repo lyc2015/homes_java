@@ -63,11 +63,18 @@ public class SalesInfoController extends BaseController {
 //        return errorsMessage.toString();
 //    }
 
-    @GetMapping("/getSales")
+//    @GetMapping("/getSales")
+//    @ResponseBody
+//    public List<SalesModel> getSales() {
+//        logger.info("National: 売上情報読み取り開始");
+//        return salesService.getSalesInfo();
+//    }
+
+    @PostMapping("/getSalesInfo")
     @ResponseBody
-    public List<SalesModel> getSales() {
+    public List<SalesModel> getSalesInfo(@RequestBody SalesModel sales) {
         logger.info("National: 売上情報読み取り開始");
-        return salesService.getSalesInfo();
+        return salesService.getSalesInfo(sales);
     }
 
     @GetMapping("/getSalesId")

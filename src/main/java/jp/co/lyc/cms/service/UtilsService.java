@@ -1,9 +1,11 @@
 package jp.co.lyc.cms.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.co.lyc.cms.model.InfoModelClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,7 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getNationalitys();
 		return list;
 	}
+
 
 	/**
 	 * 売上登録の基本情報を取得
@@ -52,10 +55,30 @@ public class UtilsService {
 			company.add(empMode);
 		}
 
+		List<InfoModelClass> InstList = utilsMapper.getInstitutionInfo();
+		List<Object> institutionInfo = new ArrayList<Object>();
+		for (InfoModelClass modelClass : InstList) {
+			Map<String, Object> empMode = new HashMap<String, Object>();
+			empMode.put("value", modelClass.getId());
+			empMode.put("label", modelClass.getFirstName());
+			institutionInfo.add(empMode);
+		}
+
+		List<InfoModelClass> vList = utilsMapper.getVisa();
+		List<Object> visaList = new ArrayList<Object>();
+		for (InfoModelClass modelClass : vList) {
+			Map<String, Object> empMode = new HashMap<String, Object>();
+			empMode.put("value", modelClass.getId());
+			empMode.put("label", modelClass.getFirstName());
+			visaList.add(empMode);
+		}
+
 		resultMap.put("employeeList",employeeList);
 		resultMap.put("adCodeList", adCodeList);
 		resultMap.put("customerList",customerList);
 		resultMap.put("company",company);
+		resultMap.put("institutionInfo",institutionInfo);
+		resultMap.put("visaList",visaList);
 		return resultMap;
 	}
 	public List<Object> getInfoMap(List<InfoModelClass> list) {
@@ -64,7 +87,7 @@ public class UtilsService {
 		for(InfoModelClass modelClass : list) {
 			Map<String, Object> empMode = new HashMap<String, Object>();
 			empMode.put("id", modelClass.getId());
-			empMode.put("firstName", modelClass.getFirstName());
+			empMode.put("firstName", modelClass.getId());
 			empMode.put("lastName", modelClass.getLastName());
 			newList.add(empMode);
 		}

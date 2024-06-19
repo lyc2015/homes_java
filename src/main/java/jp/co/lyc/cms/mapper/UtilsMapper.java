@@ -47,7 +47,6 @@ public interface UtilsMapper {
 	 */
 	public List<InfoModelClass> getCompany();
 
-
     /**
      * 場所
      *
@@ -75,4 +74,19 @@ public interface UtilsMapper {
      *
      */
     public List<ModelClass> getHomesAgentCode();
+
+	/**
+	 * 紹介人(機構)を取得
+	 *
+	 *
+	 */
+	public List<InfoModelClass> getInstitutionInfo();
+
+	/**
+	 * ビザを取得
+	 *
+	 *
+	 */
+	public List<InfoModelClass> getVisa();
+
 }
