@@ -29,4 +29,7 @@ public interface EmployeeInfoMapper {
 	 * @param emp
 	 */
 	public void updateEmployeeInfo(EmployeeModel emp);
+
+	// 管理会社最大IDを取得
+	public String searchMaxEmployeeID();
 }

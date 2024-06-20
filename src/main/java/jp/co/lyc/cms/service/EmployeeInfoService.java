@@ -48,4 +48,16 @@ public class EmployeeInfoService {
             return false;
         }
     }
+
+    @Transactional
+    public String searchMaxEmployeeID() {
+        try {
+           String maxNo = employeeInfoMapper.searchMaxEmployeeID();
+            // 可以根据需要添加更多的插入逻辑
+            return maxNo;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 public class EmployeeModel implements Serializable {
-	private int employeeNo;
+	private String employeeNo;
 	private String employeeFirstName;
 	private String employeeLastName;
 	private String password;
-	private int authorityCode;
+	private Integer authorityCode;
 	private String genderStatus;
 	private String birthday;
 	private String japaneseCalendar;
@@ -39,11 +39,11 @@ public class EmployeeModel implements Serializable {
 
 	// Getters and Setters
 
-	public int getEmployeeNo() {
+	public String getEmployeeNo() {
 		return employeeNo;
 	}
 
-	public void setEmployeeNo(int employeeNo) {
+	public void setEmployeeNo(String employeeNo) {
 		this.employeeNo = employeeNo;
 	}
 

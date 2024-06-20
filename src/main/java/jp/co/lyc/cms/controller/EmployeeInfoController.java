@@ -85,13 +85,23 @@ public class EmployeeInfoController extends BaseController {
      * 
      */
     @PostMapping("/updateEmployee")
-    public String updateEmployee(@RequestBody EmployeeModel employee) {
+    public boolean updateEmployee(@RequestBody EmployeeModel employee) {
         boolean isUpdated = employeeService.updateEmployee(employee);
-        if (isUpdated) {
-            return "更新しました";
-        } else {
-            return "更新失敗";
-        }
+        return isUpdated;
     }
-    
+
+    @GetMapping("/getMaxEmployeeNo")
+    public Map<String, Object> searchMaxID() {
+        Map<String, Object> resultMap = new HashMap<>();
+
+        // 最大管理会社IDを検索 ID+1をreturn
+        String maxID = employeeService.searchMaxEmployeeID();
+        if (maxID == null) {
+            resultMap.put("maxID", "LYH001");
+        } else {
+            resultMap.put("maxID", maxID);
+        }
+        return resultMap;
+    }
+
 }
