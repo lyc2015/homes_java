@@ -61,7 +61,31 @@
 
     <select id="selectSalesInfo" resultType="jp.co.lyc.cms.model.SalesModel">
         SELECT *
-        FROM T003salesInfo;
+        FROM T003salesInfo where 1=1
+        <if test="contractId!=''">
+        and  contractId=#{contractId}
+        </if>
+        <if test="employeeNo!=''">
+        and  employeeNo=#{employeeNo}
+        </if>
+        <if test="institutionId!=''">
+        and   institutionId=#{institutionId}
+        </if>
+        <if test="customerNo!=''">
+        and   customerNo=#{customerNo}
+        </if>
+        <if test="contractDateBegin!=''">
+        and   contractDate>=#{contractDateBegin}
+        </if>
+        <if test="contractDateEnd!=''">
+        and   contractDate &lt;= #{contractDateEnd}
+        </if>
+        <if test="asScheduledDateBegin!=''">
+            and   asScheduledDate>=#{asScheduledDateBegin}
+        </if>
+        <if test="asScheduledDateEnd!=''">
+            and   asScheduledDate &lt;= #{asScheduledDateEnd}
+        </if>
     </select>
     <select id="getSalesId" resultType="String">
         SELECT  LPAD(MAX(CAST(SUBSTRING(contractID, 2) AS UNSIGNED)) + 1, 6, '0') AS nextId FROM T003salesInfo

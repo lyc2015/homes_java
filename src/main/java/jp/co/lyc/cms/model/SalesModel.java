@@ -26,6 +26,43 @@ public class SalesModel implements Serializable  {
 	private String visa;
 	private String updateDate;
 	private String createDate;
+	private String contractDateBegin;
+	private String contractDateEnd;
+
+	public String getContractDateBegin() {
+		return contractDateBegin;
+	}
+
+	public void setContractDateBegin(String contractDateBegin) {
+		this.contractDateBegin = contractDateBegin;
+	}
+
+	public String getContractDateEnd() {
+		return contractDateEnd;
+	}
+
+	public void setContractDateEnd(String contractDateEnd) {
+		this.contractDateEnd = contractDateEnd;
+	}
+
+	public String getAsScheduledDateBegin() {
+		return asScheduledDateBegin;
+	}
+
+	public void setAsScheduledDateBegin(String asScheduledDateBegin) {
+		this.asScheduledDateBegin = asScheduledDateBegin;
+	}
+
+	public String getAsScheduledDateEnd() {
+		return asScheduledDateEnd;
+	}
+
+	public void setAsScheduledDateEnd(String asScheduledDateEnd) {
+		this.asScheduledDateEnd = asScheduledDateEnd;
+	}
+
+	private String asScheduledDateBegin;
+	private String asScheduledDateEnd;
 
 
 	public String getContractId() {

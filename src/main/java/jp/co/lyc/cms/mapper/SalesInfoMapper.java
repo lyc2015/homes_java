@@ -12,7 +12,7 @@ public interface SalesInfoMapper {
 	public void insertSalesInfo(SalesModel emp);
 
 
-	public List<SalesModel> selectSalesInfo();
+	public List<SalesModel> selectSalesInfo(SalesModel emp);
 	public String getSalesId();
 
 }

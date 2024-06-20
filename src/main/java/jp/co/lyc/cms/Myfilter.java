@@ -59,7 +59,8 @@ public class Myfilter implements Filter{
 				!requestURI.contains("subMenu")&&
 				!requestURI.contains("sales")&&
 				!requestURI.contains("getSalesBaseInfo")&&
-				!requestURI.contains("subMenu")
+				!requestURI.contains("subMenu")&&
+				!requestURI.contains("getSalesBaseInfo")
 			) {
 				if(request.getSession().getAttribute("employeeNo") == null) {
 					// response.setStatus(401);

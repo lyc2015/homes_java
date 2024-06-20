@@ -43,8 +43,8 @@ public class SalesInfoService {
          }
     }
 
-    public List<SalesModel> getSalesInfo() {
-        return SalesInfoMapper.selectSalesInfo();
+    public List<SalesModel> getSalesInfo(SalesModel sales) {
+        return SalesInfoMapper.selectSalesInfo(sales);
     }
     public String getSalesId() {
         String nextId=SalesInfoMapper.getSalesId();
