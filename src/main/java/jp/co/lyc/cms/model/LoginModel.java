@@ -2,10 +2,10 @@ package jp.co.lyc.cms.model;
 
 public class LoginModel {
 	
-	public String employeeNo;//社員番号
-	public String password;//パスワード
-	public String phoneNo;//电话号码
-	public String verificationCode;//验证码
+	public String employeeNo;		//社員番号
+	public String password;			//パスワード
+	public String phoneNo;			//电话号码
+	public String verificationCode;	//验证码
 	
 	public String getPhoneNo() {
 		return phoneNo;
@@ -31,6 +31,4 @@ public class LoginModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 }

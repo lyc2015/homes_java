@@ -25,6 +25,7 @@ public class EmployeeModel implements Serializable {
 	private Integer residenceCode;
 	private String companyMail;
 	private String phoneNo;
+	private Integer stationCode;
 	private String employmentInsuranceStatus;
 	private String socialInsuranceStatus;
 	private String yearsOfExperience;
@@ -34,8 +35,7 @@ public class EmployeeModel implements Serializable {
 	private LocalDateTime updateTime;
 	private LocalDateTime createTime;
 	private String updateUser;
-	private String t001EmployeeDetaicol;
-	private String t001EmployeeDetaicol1;
+	private String picInfo;
 
 	// Getters and Setters
 
@@ -279,19 +279,19 @@ public class EmployeeModel implements Serializable {
 		this.updateUser = updateUser;
 	}
 
-	public String getT001EmployeeDetaicol() {
-		return t001EmployeeDetaicol;
+	public String getPicInfo() {
+        return picInfo;
+    }
+
+    public void setPicInfo(String picInfo) {
+        this.picInfo = picInfo;
+    }
+
+	public Integer getStationCode() {
+		return stationCode;
 	}
 
-	public void setT001EmployeeDetaicol(String t001EmployeeDetaicol) {
-		this.t001EmployeeDetaicol = t001EmployeeDetaicol;
-	}
-
-	public String getT001EmployeeDetaicol1() {
-		return t001EmployeeDetaicol1;
-	}
-
-	public void setT001EmployeeDetaicol1(String t001EmployeeDetaicol1) {
-		this.t001EmployeeDetaicol1 = t001EmployeeDetaicol1;
+	public void setStationCode(Integer stationCode) {
+		this.stationCode = stationCode;
 	}
 }

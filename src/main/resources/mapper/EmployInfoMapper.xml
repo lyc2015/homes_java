@@ -5,12 +5,9 @@
 
 <mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
 
-    <resultMap id="EmployeeModelResultMap" type="jp.co.lyc.cms.model.EmployeeModel">
-        <!-- Define mapping between database columns and EmployeeModel fields -->
-    </resultMap>
-
+	<!-- 社員情報詳細を追加 -->
     <insert id="insertEmployeeInfo" parameterType="jp.co.lyc.cms.model.EmployeeModel">
-        INSERT INTO T001EmployeeDetai (
+        INSERT INTO T001EmployeeDetail (
             employeeNo,
             employeeFirstName,
             employeeLastName,
@@ -32,6 +29,7 @@
             residenceCode,
             companyMail,
             phoneNo,
+            stationCode,
             employmentInsuranceStatus,
             socialInsuranceStatus,
             yearsOfExperience,
@@ -42,8 +40,6 @@
             createTime,
             updateUser,
             picInfo,
-            t001EmployeeDetaicol,
-            t001EmployeeDetaicol1
         ) VALUES (
             #{employeeNo},
             #{employeeFirstName},
@@ -66,6 +62,7 @@
             #{residenceCode},
             #{companyMail},
             #{phoneNo},
+            #{stationCode},
             #{employmentInsuranceStatus},
             #{socialInsuranceStatus},
             #{yearsOfExperience},
@@ -75,10 +72,51 @@
             NOW(),
             NOW(),
             #{updateUser},
-            #{picInfo},
-            #{t001EmployeeDetaicol},
-            #{t001EmployeeDetaicol1}
+            #{picInfo}
         )
     </insert>
+
+	<!-- 社員情報を取得 -->
+    <select id="getAllEmployees" resultType="jp.co.lyc.cms.model.EmployeeModel">
+        SELECT *
+        FROM T001EmployeeDetail
+    </select>
+
+    <!-- 社員情報を更新 -->
+  <update id="updateEmployeeInfo" parameterType="jp.co.lyc.cms.model.EmployeeModel">
+    UPDATE T001EmployeeDetail
+    SET
+      employeeFirstName = #{employeeFirstName},
+      employeeLastName = #{employeeLastName},
+      password = #{password},
+      authorityCode = #{authorityCode},
+      genderStatus = #{genderStatus},
+      birthday = #{birthday},
+      japaneseCalendar = #{japaneseCalendar},
+      alphabetName = #{alphabetName},
+      furigana = #{furigana},
+      nationalityCode = #{nationalityCode},
+      intoCompanyYearAndMonth = #{intoCompanyYearAndMonth},
+      employeeFormCode = #{employeeFormCode},
+      retirementResonClassification = #{retirementResonClassification},
+      retirementYearAndMonth = #{retirementYearAndMonth},
+      comeToJapanYearAndMonth = #{comeToJapanYearAndMonth},
+      graduationUniversity = #{graduationUniversity},
+      graduationYearAndMonth = #{graduationYearAndMonth},
+      residenceCode = #{residenceCode},
+      companyMail = #{companyMail},
+      phoneNo = #{phoneNo},
+      stationCode = #{stationCode},
+      employmentInsuranceStatus = #{employmentInsuranceStatus},
+      socialInsuranceStatus = #{socialInsuranceStatus},
+      yearsOfExperience = #{yearsOfExperience},
+      retirementResonClassificationCode = #{retirementResonClassificationCode},
+      departmentCode = #{departmentCode},
+      homesAgentCode = #{homesAgentCode},
+      updateTime = NOW(),
+      updateUser = #{updateUser},
+      picInfo = #{picInfo}
+    WHERE employeeNo = #{employeeNo}
+  </update>
 
 </mapper>

@@ -1,9 +1,12 @@
 package jp.co.lyc.cms.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +23,15 @@ public class EmployeeInfoController extends BaseController {
 
     @Autowired
     private EmployeeInfoService employeeService;
-
+    /*
+     * 社員情報を追加
+     * @param emp
+     * @return boolean
+     */
     @PostMapping("/insertEmployee")
     public Map<String, Object> insertEmployee(@RequestBody EmployeeModel emp) {
         Map<String, Object> resultMap = new HashMap<>();
-
+        
         // 验证输入数据
         // String errorsMessage = validateEmployee(emp);
         // if (!errorsMessage.isEmpty()) {
@@ -60,4 +67,31 @@ public class EmployeeInfoController extends BaseController {
         
         return errorsMessage.toString();
     }
+
+    /*
+     * 
+     */
+    @GetMapping("/all")
+    public ResponseEntity<List<EmployeeModel>> getAllEmployees() {
+        List<EmployeeModel> employees = employeeService.getAllEmployees();
+        if (employees != null && !employees.isEmpty()) {
+            return ResponseEntity.ok(employees);
+        } else {
+            return ResponseEntity.noContent().build();
+        }   
+    }
+
+    /*
+     * 
+     */
+    @PostMapping("/updateEmployee")
+    public String updateEmployee(@RequestBody EmployeeModel employee) {
+        boolean isUpdated = employeeService.updateEmployee(employee);
+        if (isUpdated) {
+            return "更新しました";
+        } else {
+            return "更新失敗";
+        }
+    }
+    
 }

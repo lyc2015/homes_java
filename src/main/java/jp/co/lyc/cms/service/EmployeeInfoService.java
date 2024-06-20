@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.service;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,5 +32,20 @@ public class EmployeeInfoService {
             e.printStackTrace();
             return false;
          }
+    }
+
+    public List<EmployeeModel> getAllEmployees() {
+        return employeeInfoMapper.getAllEmployees();
+    }
+
+    @Transactional
+    public boolean updateEmployee(EmployeeModel employee) {
+        try {
+            employeeInfoMapper.updateEmployeeInfo(employee);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
