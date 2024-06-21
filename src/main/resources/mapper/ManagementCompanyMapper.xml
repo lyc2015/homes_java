@@ -22,5 +22,15 @@
         SELECT * FROM T005ManagementCompanyInfo;
     </select>
 
+    <select id="getManagementCompanyInfoByID" resultType="jp.co.lyc.cms.model.ManagementCompanyModel">
+        SELECT * FROM T005ManagementCompanyInfo where managementCompanyID = #{managementCompanyID};
+    </select>
+
+    <update id="updateManagementCompanyInfo" parameterType="jp.co.lyc.cms.model.ManagementCompanyModel">
+        UPDATE T005ManagementCompanyInfo SET managementCompanyName = #{managementCompanyName}, managementCompanyPostCode = #{managementCompanyPostCode}, 
+            managementCompanyAddress = #{managementCompanyAddress}, managementCompanyPhoneNo = #{managementCompanyPhoneNo}, managementCompanyMail = #{managementCompanyMail},
+            managementCompanyURL = #{managementCompanyURL}, managementCompanyRemark = #{managementCompanyRemark}, updateTime = NOW(), createTime = NOW(),  updateUser = #{updateUser}
+            WHERE managementCompanyID = #{managementCompanyID};
+    </update>
 
 </mapper>
