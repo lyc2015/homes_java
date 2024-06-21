@@ -103,8 +103,8 @@ public class ManagementCompanyModel implements Serializable {
         if (this.phoneNo1 != null && this.phoneNo2 != null && this.phoneNo3 != null) {
             this.managementCompanyPhoneNo = this.phoneNo1 + this.phoneNo2 + this.phoneNo3;
 
-        } else if (this.phoneNo1 != "" && this.phoneNo2 != "" && this.phoneNo3 != "") {
-            this.managementCompanyPhoneNo = this.phoneNo1 + this.phoneNo2 + this.phoneNo3;
+        // } else if (this.phoneNo1 != "" && this.phoneNo2 != "" && this.phoneNo3 != "") {
+        //     this.managementCompanyPhoneNo = this.phoneNo1 + this.phoneNo2 + this.phoneNo3;
 
         } else {
             this.managementCompanyPhoneNo = managementCompanyPhoneNo;
