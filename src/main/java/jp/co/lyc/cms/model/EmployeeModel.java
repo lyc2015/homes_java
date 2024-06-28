@@ -36,6 +36,52 @@ public class EmployeeModel implements Serializable {
 	private LocalDateTime createTime;
 	private String updateUser;
 	private String picInfo;
+	private String birthplace;
+	private String postalCode;
+	private String firstHalfAddress;
+	private String lastHalfAddress;
+	private String employmentInsuranceNo;
+	private String socialInsuranceNo;
+
+    public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getFirstHalfAddress() {
+		return firstHalfAddress;
+	}
+
+	public void setFirstHalfAddress(String firstHalfAddress) {
+		this.firstHalfAddress = firstHalfAddress;
+	}
+
+	public String getLastHalfAddress() {
+		return lastHalfAddress;
+	}
+
+	public void setLastHalfAddress(String lastHalfAddress) {
+		this.lastHalfAddress = lastHalfAddress;
+	}
+
+	public String getEmploymentInsuranceNo() {
+		return employmentInsuranceNo;
+	}
+
+	public void setEmploymentInsuranceNo(String employmentInsuranceNo) {
+		this.employmentInsuranceNo = employmentInsuranceNo;
+	}
+
+	public String getSocialInsuranceNo() {
+		return socialInsuranceNo;
+	}
+
+	public void setSocialInsuranceNo(String socialInsuranceNo) {
+		this.socialInsuranceNo = socialInsuranceNo;
+	}
 
 	// Getters and Setters
 
@@ -294,4 +340,13 @@ public class EmployeeModel implements Serializable {
 	public void setStationCode(Integer stationCode) {
 		this.stationCode = stationCode;
 	}
+
+	public String getBirthplace() {
+        return birthplace;
+    }
+
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
+	}
+
 }

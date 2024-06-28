@@ -89,4 +89,17 @@ public interface UtilsMapper {
 	 */
 	public List<InfoModelClass> getVisa();
 
+    /**
+     * 仲介区分を取得
+     *
+     *
+     */
+    public List<ModelClass> getAuthority();	
+
+	/**
+     * 仲介区分を取得
+     *
+     *
+     */
+    public List<ModelClass> getResidence();
 }

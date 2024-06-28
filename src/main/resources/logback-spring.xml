@@ -30,8 +30,8 @@
 	<appender name="fileWarnLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>WARN</level>
-<!-- 			<onMatch>DENY</onMatch> -->
-<!-- 			<onMismatch>ACCEPT</onMismatch> -->
+			<!-- <onMatch>DENY</onMatch> -->
+			<!-- <onMismatch>ACCEPT</onMismatch> -->
 		</filter>
 		<File>logback.logdir/warn.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -66,7 +66,7 @@
 	<root level="INFO">
 		<appender-ref ref="consoleLog" />
 		<appender-ref ref="fileInfoLog" />
-<!-- 		<appender-ref ref="fileWarnLog" /> -->
+		<!-- <appender-ref ref="fileWarnLog" /> -->
 		<appender-ref ref="fileErrorLog" />
 	</root>
 

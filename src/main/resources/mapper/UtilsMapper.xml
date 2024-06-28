@@ -32,6 +32,12 @@
         SELECT employeeFormCode code,employeeFormName name FROM
             M002EmployeeFormMaster;
     </select>
+    <!--国籍 -->
+    <select id="getNationalitys"
+            resultType="jp.co.lyc.cms.model.ModelClass">
+        SELECT nationalityCode code,nationalityName name FROM
+            M001NationalityMaster;
+    </select>
     <!--駅 -->
     <select id="getStation"
             resultType="jp.co.lyc.cms.model.ModelClass">
@@ -50,12 +56,16 @@
         SELECT homesAgentCode code,homesAgentName name FROM
             M006HomesAgentCodeMaster;
     </select>
-	<select id="getInstitutionInfo" resultType="jp.co.lyc.cms.model.InfoModelClass">
-		SELECT institutionNo id, institutionName firstName FROM
-			T004InstitutionInfo;
-	</select>
-	<select id="getVisa" resultType="jp.co.lyc.cms.model.InfoModelClass">
-		SELECT visaCode id, visaName firstName FROM
-			M010ResidenceCodeMaster;
-	</select>
+    <!-- 権限 -->
+    <select id="getAuthority"
+            resultType="jp.co.lyc.cms.model.ModelClass">
+        SELECT authorityCode code,authorityName name FROM
+            M003AuthorityMaster;
+    </select>
+    <!-- 在留資格 -->
+    <select id="getResidence"
+            resultType="jp.co.lyc.cms.model.ModelClass">
+        SELECT visaCode code,visaName name FROM
+            M010ResidenceCodeMaster;
+    </select>
 </mapper>

@@ -133,4 +133,24 @@ public class UtilsService {
         List<ModelClass> list = utilsMapper.getHomesAgentCode();
         return list;
     }
+	
+    /**
+     * 権限を取得
+     *
+     * @return
+     */
+    public List<ModelClass> getAuthority() {
+        List<ModelClass> list = utilsMapper.getAuthority();
+        return list;
+    }
+
+	/**
+	 * 在留資格を取得
+	 *
+	 * @return
+	 */
+	public List<ModelClass> getResidence() {
+		List<ModelClass> list = utilsMapper.getResidence();
+		return list;
+	}
 }
