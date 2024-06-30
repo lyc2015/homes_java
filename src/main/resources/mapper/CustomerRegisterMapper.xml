@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.lyc.cms.mapper.CustomerRegisterMapper">
+
+    <!-- <insert id="registerManagementCompany" parameterType="jp.co.lyc.cms.model.ManagementCompanyModel">
+        INSERT INTO T005ManagementCompanyInfo (managementCompanyID, managementCompanyName, managementCompanyPostCode, managementCompanyAddress, managementCompanyPhoneNo, managementCompanyMail, managementCompanyURL, managementCompanyRemark, updateTime, createTime, updateUser) VALUES (#{managementCompanyID}, #{managementCompanyName}, #{managementCompanyPostCode},  #{managementCompanyAddress}, #{managementCompanyPhoneNo}, #{managementCompanyMail},  #{managementCompanyURL},  #{managementCompanyRemark}, NOW(), NOW(), #{updateUser})
+    
+    </insert> -->
+
+    <select id="searchAllNationalityInfo" resultType="jp.co.lyc.cms.model.CustomerRegisterModel">
+       SELECT nationalityCode, nationalityName FROM M001NationalityMaster;  
+    </select>
+
+    <select id="searchAllVisaType" resultType="jp.co.lyc.cms.model.CustomerRegisterModel">
+       SELECT visaCode, visaName FROM M010ResidenceCodeMaster;
+    </select>
+
+    <select id="searchAllCustomerBase" resultType="jp.co.lyc.cms.model.CustomerRegisterModel">
+       SELECT customerBaseCode, customerBaseName FROM M007CustomerBaseMaster;
+    </select>
+
+    <select id="searchAllStations" resultType="jp.co.lyc.cms.model.CustomerRegisterModel">
+       SELECT stationCode,  stationName FROM M008StationMaster;
+    </select>
+
+    <select id="getMaxCustomerNo" resultType="java.lang.String">
+      SELECT CONCAT('C', LPAD(MAX(CAST(SUBSTRING(customerID, 2) AS UNSIGNED)) + 1, 5, '0')) AS next_code FROM T002customerInfo;
+    </select>
+
+
+   
+</mapper>
