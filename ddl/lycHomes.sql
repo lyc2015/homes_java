@@ -1,3 +1,5 @@
+USE lycHomes;
+
 DROP TABLE IF EXISTS T001EmployeeDetail;
 CREATE TABLE T001EmployeeDetail (
     employeeNo VARCHAR(6) NOT NULL COMMENT '社員番号',
