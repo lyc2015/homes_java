@@ -38,7 +38,7 @@ public class EmployeeInfoController extends BaseController {
         //     resultMap.put("errorsMessage", errorsMessage);
         //     return resultMap;
         // }
-
+        emp.setUpdateUser((String) getSession().getAttribute("user"));
         // 插入数据到数据库
         boolean result = employeeService.insertEmployee(emp);
         resultMap.put("result", result);

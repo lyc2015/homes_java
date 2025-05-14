@@ -32,7 +32,6 @@
             residenceCode,
             companyMail,
             phoneNo,
-            stationCode,
             employmentInsuranceStatus,
             socialInsuranceStatus,
             yearsOfExperience,
@@ -43,10 +42,6 @@
             createTime,
             updateUser,
             picInfo,
-            birthplace,
-            postalCode,
-            firstHalfAddress,
-            lastHalfAddress,
             employmentInsuranceNo,
             socialInsuranceNo
         ) VALUES (
@@ -70,7 +65,6 @@
             #{residenceCode},
             #{companyMail},
             #{phoneNo},
-            #{stationCode},
             #{employmentInsuranceStatus},
             #{socialInsuranceStatus},
             #{yearsOfExperience},
@@ -81,10 +75,6 @@
             NOW(),
             #{updateUser},
             #{picInfo},
-            #{birthplace},
-            #{postalCode},
-            #{firstHalfAddress},
-            #{lastHalfAddress},
             #{employmentInsuranceNo},
             #{socialInsuranceNo}
         )

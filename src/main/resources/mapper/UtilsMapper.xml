@@ -65,7 +65,7 @@
     <!-- 在留資格 -->
     <select id="getResidence"
             resultType="jp.co.lyc.cms.model.ModelClass">
-        SELECT visaCode code,visaName name FROM
-            M010ResidenceCodeMaster;
+        SELECT residenceCode code,visaName name FROM
+            M010ResidenceMaster;
     </select>
 </mapper>

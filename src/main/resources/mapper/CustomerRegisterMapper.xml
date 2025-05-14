@@ -15,7 +15,7 @@
     </select>
 
     <select id="searchAllVisaType" resultType="jp.co.lyc.cms.model.CustomerRegisterModel">
-       SELECT visaCode, visaName FROM M010ResidenceCodeMaster;
+       SELECT residenceCode, visaName FROM M010ResidenceMaster;
     </select>
 
     <select id="searchAllCustomerBase" resultType="jp.co.lyc.cms.model.CustomerRegisterModel">
