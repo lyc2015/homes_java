@@ -29,9 +29,7 @@ public class EmployeeInfoController extends BaseController {
      * @return boolean
      */
     @PostMapping("/insertEmployee")
-    public Map<String, Object> insertEmployee(@RequestBody EmployeeModel emp) {
-        Map<String, Object> resultMap = new HashMap<>();
-        
+    public boolean insertEmployee(@RequestBody EmployeeModel emp) {
         // 验证输入数据
         // String errorsMessage = validateEmployee(emp);
         // if (!errorsMessage.isEmpty()) {
@@ -41,8 +39,7 @@ public class EmployeeInfoController extends BaseController {
         emp.setUpdateUser((String) getSession().getAttribute("user"));
         // 插入数据到数据库
         boolean result = employeeService.insertEmployee(emp);
-        resultMap.put("result", result);
-        return resultMap;
+        return result;
     }
 
     private String validateEmployee(EmployeeModel emp) {
@@ -86,6 +83,7 @@ public class EmployeeInfoController extends BaseController {
      */
     @PostMapping("/updateEmployee")
     public boolean updateEmployee(@RequestBody EmployeeModel employee) {
+        employee.setUpdateUser((String) getSession().getAttribute("user"));
         boolean isUpdated = employeeService.updateEmployee(employee);
         return isUpdated;
     }

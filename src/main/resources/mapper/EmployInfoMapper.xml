@@ -109,7 +109,6 @@
         residenceCode = #{residenceCode},
         companyMail = #{companyMail},
         phoneNo = #{phoneNo},
-        stationCode = #{stationCode},
         employmentInsuranceStatus = #{employmentInsuranceStatus},
         socialInsuranceStatus = #{socialInsuranceStatus},
         yearsOfExperience = #{yearsOfExperience},
@@ -119,10 +118,6 @@
         updateTime = NOW(),
         updateUser = #{updateUser},
         picInfo = #{picInfo},
-        birthplace = #{birthplace},
-        postalCode = #{postalCode},
-        firstHalfAddress = #{firstHalfAddress},
-        lastHalfAddress = #{lastHalfAddress},
         employmentInsuranceNo = #{employmentInsuranceNo},
         socialInsuranceNo = #{socialInsuranceNo}
     WHERE employeeNo = #{employeeNo}
